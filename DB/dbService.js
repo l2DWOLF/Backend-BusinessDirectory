@@ -1,8 +1,7 @@
-import { createError } from "../utils/errorHandlers.js";
 import { connectToAtlasDB } from "./mongodb/connectToAtlas.js";
 import { connectToLocalMongo } from "./mongodb/connectToLocalMongo.js";
-import confirg from 'config';
 import { seedInitialUsers, seedInitialCards } from "./seeding/initialLocalData.js";
+import confirg from 'config';
 
 const ENVIRONMENT = confirg.get("ENVIRONMENT");
 

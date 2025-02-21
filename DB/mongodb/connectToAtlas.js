@@ -1,8 +1,8 @@
 import chalk from 'chalk';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-
 dotenv.config();
+
 const connectionString4Atlas = process.env.ATLAS_STRING; 
 
 export const connectToAtlasDB = async () => {

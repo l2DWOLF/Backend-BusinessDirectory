@@ -1,11 +1,11 @@
 import normalizeUser from "../../users/helpers/normalizeUser.js";
 import User from "../../users/models/mongodb/Users.js";
 import { registerUser } from "../../users/models/userAccessDataService.js";
-import chalk from 'chalk';
 import { createError } from "../../utils/errorHandlers.js";
 import Card from "../../cards/models/mongodb/Cards.js";
 import normalizeCard from "../../cards/helpers/normalize.js";
 import { createCard } from "../../cards/models/cardAccessDataService.js";
+import chalk from 'chalk';
 
 const initialUsers = [
     {

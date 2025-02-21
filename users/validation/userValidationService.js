@@ -1,7 +1,7 @@
 import handleJoiLoginVali from "./joi/joiLoginValidation.js";
 import handleJoiRegisterVali from "./joi/joiRegisterValidation.js";
-import config from 'config';
 import handleJoiUpdateVali from "./joi/joiUpdateValidation.js";
+import config from 'config';
 
 const validator = config.get("VALIDATOR");
 

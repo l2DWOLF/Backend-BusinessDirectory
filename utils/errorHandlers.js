@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import chalk from 'chalk';
 
 const createError = (validator, error) => {
     error.message = `${validator} Error:\nDetails: ${error.message}.`;
