@@ -4,7 +4,9 @@ import usersRouterController from '../users/routes/userRestControllers.js';
 import { handleError } from '../utils/errorHandlers.js';
 const router = express.Router();
 
-
+router.get("/", (req, res) => {
+    res.sendFile("home.html", { root: "./public" });
+});
 router.use("/cards", cardsRouterController);
 router.use("/users", usersRouterController);
 router.use((req, res) => {
