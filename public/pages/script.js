@@ -6,7 +6,6 @@ async function fetchCards() {
     try {
         const res = await fetch(`${production}/cards`);
         const cards = await res.json();
-        console.log(cards);
 
         const display = document.querySelector(".cards-display");
         cards.forEach((card) => {
