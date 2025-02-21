@@ -9,8 +9,9 @@ This backend project is a robust and scalable REST API built with Node.js, Expre
 - User authentication (Register/Login/Logout), Password hashing, token.
 - Create, Read, Update, Delete (CRUD) operations for business cards & users.
 - Like/Unlike business cards.
-- Database Seeding. 
+- Automated Database Seeding. 
 - Middleware for authentication and validation.
+- File error logger. 
 
 ## Technologies Used
 
@@ -34,7 +35,7 @@ This backend project is a robust and scalable REST API built with Node.js, Expre
 
 1. Clone the repository:
    ```sh
-   git clone <repository-url>
+   git clone l2DWOLF/Backend-BusinessDirectory
    ```
 2. Navigate into the project folder:
    ```sh
