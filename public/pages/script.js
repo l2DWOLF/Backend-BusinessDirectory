@@ -1,17 +1,10 @@
-import dotenv from "dotenv";
-import config from "config";
 
-dotenv.config();
 
-const ENVIRONMENT = config.get("ENVIRONMENT");
-const connectionString4Atlas = process.env.ATLAS_STRING;
-const localApi = process.env.LOCAL_API;
-
-const api = ENVIRONMENT === "development" ? localApi : connectionString4Atlas;
+const production = "https://backend-businessdirectory.onrender.com";
 
 async function fetchCards() {
     try {
-        const res = await fetch(`${api}/cards`);
+        const res = await fetch(`${production}/cards`);
         const cards = await res.json();
         console.log(cards);
 
