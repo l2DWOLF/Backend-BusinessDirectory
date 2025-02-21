@@ -5,7 +5,7 @@ import { handleError } from '../utils/errorHandlers.js';
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    res.sendFile("home.html", { root: "./public" });
+    res.sendFile("pages/home.html", { root: "./public" });
 });
 router.use("/cards", cardsRouterController);
 router.use("/users", usersRouterController);
