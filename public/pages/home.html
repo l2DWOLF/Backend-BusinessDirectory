@@ -60,28 +60,47 @@
 
     </div>
     <script>
-        fetch("http://localhost:8181/cards").then((res) => res.json())
-            .then((cards) => {
-                console.log(cards);
-                const display = document.querySelector('.cards-display');
-                cards.forEach((card) => {
-                    const cardDiv = document.createElement('div');
-                    cardDiv.style = "border:1px solid blue; padding: 12px; margin-bottom: 12px; text-align: left;";
-                    cardDiv.className = "card";
-                    for (const property in card) {
-                        if(property == "image" || property == "address" || property == "user_id" || property == "__v"){
-                            continue;
-                        }
-                        const cardP = document.createElement('p');
-                                                cardP.style = "border-bottom:1px solid gray; padding: 4px;";
-                        cardP.innerHTML = `${property}: ${card[property]}`;
-                        cardDiv.appendChild(cardP);
-                    };
-                    
-                    display.appendChild(cardDiv);
-                });
-            })
-            .catch((err) => console.error(err));
+        import dotenv from 'dotenv';
+        import confirg from 'config';
+        dotenv.config(); 
+
+        const ENVIRONMENT = confirg.get("ENVIRONMENT");
+        const connectionString4Atlas = process.env.ATLAS_STRING; 
+        const localApi = process.env.LOCAL_API;
+        const api = "";
+
+        if(ENVIRONMENT === "development"){
+            api = localApi;
+        }
+        else{ 
+            api = connectionString4Atlas;
+        }
+        try {
+            await fetch(api).then((res) => res.json())
+                .then((cards) => {
+                    console.log(cards);
+                    const display = document.querySelector('.cards-display');
+                    cards.forEach((card) => {
+                        const cardDiv = document.createElement('div');
+                        cardDiv.style = "border:1px solid blue; padding: 12px; margin-bottom: 12px; text-align: left;";
+                        cardDiv.className = "card";
+                        for (const property in card) {
+                            if (property == "image" || property == "address" || property == "user_id" || property == "__v") {
+                                continue;
+                            }
+                            const cardP = document.createElement('p');
+                            cardP.style = "border-bottom:1px solid gray; padding: 4px;";
+                            cardP.innerHTML = `${property}: ${card[property]}`;
+                            cardDiv.appendChild(cardP);
+                        };
+                        display.appendChild(cardDiv);
+                    });
+                })
+                .catch((err) => console.error(err));
+        } catch (error) {
+            console.error("Homepage Error: ", error);
+        };
+        
     </script>
 </body>
 </html>
