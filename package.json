@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "bcryptjs": "^3.0.0",
+    "chalk": "^5.4.1",
+    "config": "^3.3.12",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^8.10.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.9"
+  },
+  "name": "nodejs-mongodb-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node app",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development nodemon app"
+  },
+  "keywords": [],
+  "author": "IE",
+  "license": "ISC",
+  "description": "Backend Project - Business Directory"
+}
