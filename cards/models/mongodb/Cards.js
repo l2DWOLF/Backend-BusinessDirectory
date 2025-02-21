@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { DEFAULT_VALIDATION, EMAIL_VALIDATION, PHONE_VALIDATION, URL_VALIDATION } from '../../../helpers/MongoDB/mongooseValidators.js';
 import ImageSchema from "../../../helpers/MongoDB/ImageSchema.js";
-import AddressSchema from '../../../helpers/MongoDB/addressSchema.js';
+import AddressSchema from '../../../helpers/MongoDB/AddressSchema.js';
 
 
 const cardSchema = new mongoose.Schema({
