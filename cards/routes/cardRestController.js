@@ -3,7 +3,7 @@ import {
     getUserCards, getOneCard,
     getAllCards, createCard,
     updateCard, likeCard,
-    deleteCard
+    changeBizNum, deleteCard
 } from '../models/cardAccessDataService.js';
 import auth from "../../auth/authService.js";
 import normalizeCard from "../helpers/normalize.js";
@@ -93,21 +93,34 @@ router.put("/:id", auth, async (req, res) => {
         handleError(res, error.status || 400, error.message);
     };
 });
-// Like Card //
+// Like Card + Change Biz Num //
 router.patch("/:id", auth, async (req, res) => {
     try {
         let cardId = req.params.id;
         let userInfo = req.user;
 
-        if (!userInfo._id) {
+        if(!userInfo._id) {
             return handleError(res, 403, "Error: Only Registered Users may like business cards");
         };
-        let card2Like = await getOneCard(cardId);
-        if (!card2Like) {
+        let card2Update = await getOneCard(cardId);
+        if(!card2Update) {
             return handleError(res, 403, "Card doesn't exist!");
         };
-        card2Like = await likeCard(card2Like, userInfo._id);
-        res.status(200).send(card2Like);
+        if(card2Update.bizNumber === req.body.bizNumber){
+            return handleError(res, 403, `This card's Business Number is already set to: ${req.body.bizNumber}`);
+        };
+
+        if(!req.body){
+            card2Update = await likeCard(card2Update, userInfo._id);
+            res.status(200).send(card2Like);
+        }
+        else{
+            if(!userInfo.isAdmin){
+                return handleError(res, 403, "Authorization Error: Only Admins may change business numbers");
+            };
+            card2Update = await changeBizNum(card2Update, req.body.bizNumber);
+            res.status(200).send(card2Update);
+        };
     } catch (error) {
         handleError(res, error.status || 400, error.message);
     };

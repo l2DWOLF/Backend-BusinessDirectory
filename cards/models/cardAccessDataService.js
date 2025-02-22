@@ -115,6 +115,25 @@ const likeCard = async (card, userId) => {
     error.status = 500;
     return createError("Database", error);
 };
+// Change Biz Num //
+const changeBizNum = async (card, newBizNum) => {
+    if (DB === "MongoDB") {
+        try {
+            const isBizNumFree = await Card.findOne({ bizNumber: newBizNum });
+            if (isBizNumFree) {
+                throw new Error("Business Number is already in use by another Business Card");
+            };
+            card.bizNumber = newBizNum;
+            await card.save();
+            return card;
+        } catch (error) {
+            return createError("Mongoose", error);
+        };
+    };
+    const error = new Error("The selected database doesn't exist");
+    error.status = 500;
+    return createError("Database", error);
+};
 // Delete Card //
 const deleteCard = async(cardId) => {
 if (DB === "MongoDB") {
@@ -130,4 +149,4 @@ if (DB === "MongoDB") {
     return createError("Database", error);
 };
 
-export { getOneCard, getUserCards, getAllCards, createCard, updateCard, likeCard, deleteCard };
+export { getOneCard, getUserCards, getAllCards, createCard, updateCard, likeCard, changeBizNum, deleteCard };

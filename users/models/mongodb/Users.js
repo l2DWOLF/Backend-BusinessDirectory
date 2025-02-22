@@ -21,6 +21,11 @@ const userSchema = new mongoose.Schema({
     createdAt: {
         type: Date, 
         default: Date.now
+    },
+    loginAttempts: {
+        attempts: {type: Number, default: 0},
+        blockLogin: {type: Boolean, default: false},
+        blockUntil: { type: Date, default: null }
     }
 });
 const User = mongoose.model("user", userSchema);

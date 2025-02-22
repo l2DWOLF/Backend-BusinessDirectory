@@ -11,14 +11,34 @@ const DB = config.get("DB");
 const loginUser = async (email, password) => {
     if (DB === "MongoDB") {
         try {
-            const userFromDB = await User.findOne({ email });
+            let userFromDB = await User.findOne({ email });
             if (!userFromDB) {
                 throw new Error("Account Doesn't Exist, Please Register");
             };
-            if (!handleCompare(password, userFromDB.password)) {
-                throw new Error("Wrong Password - Please try again");
+            if (userFromDB.loginAttempts.blockLogin) {
+                const blockUntil = userFromDB.loginAttempts.blockUntil;
+                if (blockUntil && new Date() < new Date(blockUntil)) {
+                    throw new Error(`Max Login Attempts Exceeded limit(3) - Account is Locked until: ${blockUntil}`);
+                } else {
+                    userFromDB.loginAttempts.blockLogin = false;
+                    userFromDB.loginAttempts.attempts = 0;
+                    userFromDB.loginAttempts.blockUntil = null;
+                    userFromDB = await userFromDB.save();
+                };
             };
-
+            let loginAttempts = userFromDB.loginAttempts.attempts || 0;
+            if (!handleCompare(password, userFromDB.password)) {
+                loginAttempts++;
+                userFromDB.loginAttempts.attempts = loginAttempts;
+                if (loginAttempts > 3) {
+                    userFromDB.loginAttempts.blockLogin = true;
+                    userFromDB.loginAttempts.blockUntil = new Date(Date.now() + 24 * 60 * 60 * 1000);
+                    userFromDB = await userFromDB.save();
+                    throw new Error("Max Login Attempts Exceeded limit(3) - This Account is now locked for 24 hours.");
+                };
+                userFromDB = await userFromDB.save();
+                throw new Error(`Wrong Password, login attempts remaining: ${loginAttempts} / 3 max logins. Account will lock for 24 hours afterwards`);
+            };
             const token = generateAuthToken(userFromDB);
             return token;
         } catch (error) {
