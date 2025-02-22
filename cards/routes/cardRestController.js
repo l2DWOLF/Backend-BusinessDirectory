@@ -110,9 +110,9 @@ router.patch("/:id", auth, async (req, res) => {
             return handleError(res, 403, `This card's Business Number is already set to: ${req.body.bizNumber}`);
         };
 
-        if(!req.body){
+        if (Object.keys(req.body).length === 0){
             card2Update = await likeCard(card2Update, userInfo._id);
-            res.status(200).send(card2Like);
+            res.status(200).send(card2Update);
         }
         else{
             if(!userInfo.isAdmin){
