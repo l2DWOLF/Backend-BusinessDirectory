@@ -39,6 +39,10 @@ const loginUser = async (email, password) => {
                 userFromDB = await userFromDB.save();
                 throw new Error(`Wrong Password, login attempts remaining: ${loginAttempts} / 3 max logins. Account will lock for 24 hours afterwards`);
             };
+            userFromDB.loginAttempts.blockLogin = false;
+            userFromDB.loginAttempts.attempts = 0;
+            userFromDB.loginAttempts.blockUntil = null;
+            userFromDB = await userFromDB.save();
             const token = generateAuthToken(userFromDB);
             return token;
         } catch (error) {
