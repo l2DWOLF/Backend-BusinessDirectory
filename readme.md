@@ -1,101 +1,75 @@
-# Backend Project
+# 🧠 IE Business Directory – Backend
 
-## Description
+## 📦 Description
 
-This backend project is a robust and scalable REST API built with Node.js, Express, and MongoDB. It provides a secure authentication system, user profile management, and a full suite of CRUD operations for business cards and users. Designed to integrate seamlessly with a separate frontend, it ensures efficient data handling, validation, and user authorization. With middleware for authentication and request validation, this backend serves as a reliable foundation for dynamic web applications.
-
-## Features
-
-- User authentication (Register/Login/Logout), Password hashing, token.
-- Create, Read, Update, Delete (CRUD) operations for business cards & users.
-- Like/Unlike business cards.
-- Automated Database Seeding. 
-- Middleware for authentication and validation.
-- File error logger. 
-
-## Technologies Used
-
-### Dependencies
-
-- **bcryptjs**: Password hashing.
-- **chalk**: Terminal string styling.
-- **config**: Configuration management.
-- **cors**: Cross-Origin Resource Sharing.
-- **cross-env**: Cross-platform environment variables.
-- **dotenv**: Environment variable management.
-- **express**: Web framework for Node.js.
-- **joi**: Data validation.
-- **jsonwebtoken**: JWT-based authentication.
-- **lodash**: Utility functions.
-- **mongoose**: MongoDB Object Modeling (ODM).
-- **morgan**: HTTP request logger.
-- **nodemon**: Automatic server restarts during development.
-
-## 🖥️ Live Demo Frontend 
-
-👉 [Explore this backend project via a Frontend UI](https://ie-business-directory.onrender.com/)
-- **To connect to this backend, select "DB: IE Backend" from the navbar db selection list**
+This backend project powers the **IE Business Directory** — a scalable and secure RESTful API built using **Node.js**, **Express**, and **MongoDB**. It offers full CRUD functionality for users and business cards, robust authentication and authorization with JWT, and data validation via Joi. Designed to integrate seamlessly with a React-based frontend, it supports multi-database environments for flexible development and production configurations.
 
 ---
-## Installation
 
-1. Clone the repository:
-   ```sh
-   git clone l2DWOLF/Backend-BusinessDirectory
-   ```
-2. Navigate into the project folder:
-   ```sh
-   cd backend
-   ```
-3. Install dependencies:
-   ```sh
-   npm install
-   ```
-4. Create a `.env` file and add the required environment variables (such as database connection string, JWT secret, etc.).
-5. Start the server:
-   ```sh
-   npm start
-   ```
-   For development mode with automatic restarts:
-   ```sh
-   npm run dev
-   ```
+## 🚀 Features
 
-## API Endpoints
+- 🔐 **User Authentication** — Register, Login, and token-based session handling
+- 🧾 **CRUD Operations** — For both Users and Business Cards
+- ❤️ **Like / Unlike Cards**
+- 🧪 **Input Validation** — Using Joi
+- 🔑 **Role-Based Access Control**
+- 🛡️ **Middleware-Driven Security** — Auth guards and ownership verification
+- ⚙️ **Multi-DB Support** — Easily toggle between different database environments (e.g., campus vs. personal)
+- 🪵 **File Logger** — Server-side error logging
+- 🌱 **DB Seeding** — For quick development bootstrapping
 
-### Auth Routes
+---
 
-- `POST /api/users/login` - Authenticate user and return token.
-- `POST /api/users/` - Register a new user.
+## 🛠️ Tech Stack
 
-### User Routes
+### Core Stack
+- **Node.js** + **Express** — Backend framework
+- **MongoDB** + **Mongoose** — Database & ODM
+- **JWT (jsonwebtoken)** — Secure token authentication
+- **Joi** — Data validation
 
-- `GET /api/users/` - Get all users. (Admin only).
-- `GET /api/users/:id` - Get a user by ID. (Owner or Admin only).
-- `PUT /api/users/:id` - Update user details. (Owner only).
-- `PATCH /api/users/:id` - Update user business status. (Owner only).
-- `DELETE /api/users/:id` - Delete a user (Owner/Admin only).
+### Dev & Utilities
+- **bcryptjs** — Password hashing
+- **chalk** — Colorized terminal logs
+- **dotenv** — Environment variable management
+- **cors** — Cross-origin resource sharing
+- **morgan** — HTTP request logger
+- **nodemon** — Live development server
+- **lodash** — Utility library
+- **cross-env** — Environment variable scripting
 
-### Card Routes
+---
 
-- `GET /api/cards/` - Get all business cards
-- `GET /api/cards/my-cards` - Get logged-in user's cards (Owner only).
-- `GET /api/cards/:id` - Get a single card by ID 
-- `POST /api/cards/` - Create a new card (Business users only).
-- `PUT /api/cards/:id` - Update a card (Owner only).
-- `PATCH /api/cards/:id` - Like/Unlike a card (Registered Users only).
-- `DELETE /api/cards/:id` - Delete a card (Owner/Admin only).
+## 🖥️ Live Demo UI
 
-## Environment Variables
+👉 [Explore the App (Frontend)](https://ie-business-directory.onrender.com/)
 
-Ensure you have a `.env` file with the following variables:
+> 🔄 **Switch between backends:** Use the dropdown in the top-left of the Navbar to toggle API sources.  
+> 🧼 **Note:** Switching backends logs the user out to maintain consistency and security.
 
-```
-JWT_SECRET=<your_jwt_secret>
-MONGO_URI=<your_mongo_connection_string>
-LOCAL_API=<your_local_api>
-```
+---
 
-## License
+## 📡 API Endpoints
 
-This project is open-source and available under the [MIT License](LICENSE).
+### 🔐 Auth Routes
+
+- `POST /api/users/login` – Login and receive JWT  
+- `POST /api/users/` – Register a new user  
+
+### 👤 User Routes
+
+- `GET /api/users/` – Get all users (Admin only)  
+- `GET /api/users/:id` – Get user by ID (Owner or Admin)  
+- `PUT /api/users/:id` – Update user details (Owner only)  
+- `PATCH /api/users/:id` – Update business status (Owner only)  
+- `DELETE /api/users/:id` – Delete user (Owner or Admin)  
+
+### 🗂️ Card Routes
+
+- `GET /api/cards/` – Get all business cards  
+- `GET /api/cards/my-cards` – Get current user's cards  
+- `GET /api/cards/:id` – Get a single card  
+- `POST /api/cards/` – Create a new card (Business users)  
+- `PUT /api/cards/:id` – Edit a card (Owner only)  
+- `PATCH /api/cards/:id` – Like/unlike card (Registered users)  
+- `DELETE /api/cards/:id` – Remove card (Owner or Admin)  
