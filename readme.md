@@ -31,6 +31,12 @@ This backend project is a robust and scalable REST API built with Node.js, Expre
 - **morgan**: HTTP request logger.
 - **nodemon**: Automatic server restarts during development.
 
+## 🖥️ Live Demo Frontend 
+
+👉 [Explore this backend project via a Frontend UI](https://ie-business-directory.onrender.com/)
+- **To connect to this backend, select "DB: IE Backend" from the navbar db selection list**
+
+---
 ## Installation
 
 1. Clone the repository:
